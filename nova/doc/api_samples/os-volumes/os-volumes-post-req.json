@@ -1,0 +1,8 @@
+{
+    "volume": {
+        "availability_zone": "dublin",
+        "display_name": "Volume Name",
+        "display_description": "Volume Description",
+        "size": 100
+    }
+}

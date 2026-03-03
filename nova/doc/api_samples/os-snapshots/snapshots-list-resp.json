@@ -1,0 +1,31 @@
+{
+    "snapshots": [
+        {
+            "createdAt": "2025-06-12T14:56:28.865898",
+            "displayDescription": "Default description",
+            "displayName": "Default name",
+            "id": "f3ddb3ee-7fed-4237-ac25-1d4d8c0fb127",
+            "size": 100,
+            "status": "available",
+            "volumeId": "4fe5b5eb-694e-4ead-ba98-ecffc6ff1d21"
+        },
+        {
+            "createdAt": "2025-06-12T14:56:28.865915",
+            "displayDescription": "Default description",
+            "displayName": "Default name",
+            "id": "d018c6d5-0a75-4001-aef2-9f9df82feb6e",
+            "size": 100,
+            "status": "available",
+            "volumeId": "4fe5b5eb-694e-4ead-ba98-ecffc6ff1d21"
+        },
+        {
+            "createdAt": "2025-06-12T14:56:28.865925",
+            "displayDescription": "Default description",
+            "displayName": "Default name",
+            "id": "df0a2535-bab9-4bec-b03b-656f741b1c45",
+            "size": 100,
+            "status": "available",
+            "volumeId": "4fe5b5eb-694e-4ead-ba98-ecffc6ff1d21"
+        }
+    ]
+}
