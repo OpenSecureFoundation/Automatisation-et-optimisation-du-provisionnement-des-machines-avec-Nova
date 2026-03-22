@@ -11,8 +11,8 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
 
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 ![Node](https://img.shields.io/badge/node-20.20.0-blue.svg)
-![React](https://img.shields.io/badge/react-18.x-blue.svg)
-![OpenStack](https://docs.openstack.org/nova/latest/)
+![React](https://img.shields.io/badge/react-18.3.1-blue.svg)
+![OpenStack](https://img.shields.io/badge/openstack-Yoga-red.svg)
 
 ---
 
