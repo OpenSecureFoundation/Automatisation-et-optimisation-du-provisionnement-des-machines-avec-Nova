@@ -1,11 +1,18 @@
+Automatisation et optimisation du provisionnement des machines avec Nova
+Projet d'automatisation et de l'optimisation du provisionnement des machines avec openStack nova
+
+Objectifs :
+• Créer un orchestrateur personnalisé pour le déploiement automatique de VM en fonction des besoins métiers
+
+• Implémenter des politiques de planification avancées dans Nova pour optimiser l'utilisation des ressources
 # VM Marketplace — Plateforme de Gestion de Machines Virtuelles
 
 Une application web moderne pour la vente et la gestion de machines virtuelles basée sur OpenStack.
 
 ![Status](https://img.shields.io/badge/status-active-success.svg)
-![Node](https://img.shields.io/badge/node-20.x-blue.svg)
+![Node](https://img.shields.io/badge/node-20.20.0-blue.svg)
 ![React](https://img.shields.io/badge/react-18.x-blue.svg)
-![OpenStack](https://img.shields.io/badge/openstack-Yoga-red.svg)
+![OpenStack](https://docs.openstack.org/nova/latest/)
 
 ---
 
@@ -151,7 +158,7 @@ Ce projet utilise **SQLite** — aucune installation externe n'est nécessaire. 
 ### Étape 1 — Cloner le dépôt
 
 ```bash
-git clone <url-du-repo> VMmarketplace
+git clone <https://github.com/OpenSecureFoundation/Automatisation-et-optimisation-du-provisionnement-des-machines-avec-Nova> VMmarketplace
 cd VMmarketplace
 ```
 
