@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6d28d9;
+  --primary-hover: #5b21b6;
+  --primary-light: rgba(109, 40, 217, 0.12);
+  --primary-border: #6d28d9;
+  --secondary: #0f172a;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --info: #2563eb;
+  --deal-light: #ecfccb;
+  --card-bg: #ffffff;
+  --dark: #0f172a;
+  --light: #f1f5f9;
+  --text: #1e293b;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --bg-page: #f8fafc;
+  --border: #e2e8f0;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --shadow-card: 0 6px 24px rgba(15, 23, 42, 0.08);
+  --shadow-card-hover: 0 14px 34px rgba(15, 23, 42, 0.14);
+  --shadow-focus: 0 0 0 3px rgba(109, 40, 217, 0.2);
+  --skeleton-bg: #eef2f7;
+  --skeleton-shine: #f8fafc;
+  --font-heading: 'Satoshi', 'Poppins', sans-serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-page);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.4) transparent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+}
+
+div[class*="react-hot-toast"] {
+  border-radius: var(--radius-lg) !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.list-item {
+  animation: fadeIn 0.3s ease-out;
+  animation-fill-mode: both;
+}

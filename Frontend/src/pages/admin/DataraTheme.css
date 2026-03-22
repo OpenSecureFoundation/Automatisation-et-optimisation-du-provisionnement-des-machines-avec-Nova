@@ -1,0 +1,504 @@
+/* ============================================================
+   DATARA THEME — Design system inspiré de l'image de référence
+   Palette: fond blanc, accents bleu primaire (#3b6ef6), sidebar sombre
+   ============================================================ */
+
+/* Shell principal */
+.dt-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+  min-height: 100%;
+  background: #f7f8fc;
+}
+
+/* ─── KPI Row ─── */
+.dt-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1100px) { .dt-kpi-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .dt-kpi-row { grid-template-columns: 1fr; } }
+
+.dt-kpi-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #edf0f7;
+  box-shadow: 0 2px 10px rgba(15,23,60,0.05);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.dt-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59,110,246,0.1);
+}
+
+.dt-kpi-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.dt-kpi-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.dt-kpi-label {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dt-kpi-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f0f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b6ef6;
+  flex-shrink: 0;
+}
+
+.dt-kpi-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ─── Main 2-col grid ─── */
+.dt-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1rem;
+}
+
+@media (max-width: 1050px) {
+  .dt-main-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Card base ─── */
+.dt-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #edf0f7;
+  box-shadow: 0 2px 10px rgba(15,23,60,0.05);
+  overflow: hidden;
+}
+
+.dt-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 0.75rem;
+}
+
+.dt-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+/* ─── Select dropdown ─── */
+.dt-select {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #475569;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.dt-select:focus { border-color: #3b6ef6; }
+
+/* ─── Chart ─── */
+.dt-card--chart { padding-bottom: 1rem; }
+
+.dt-chart {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem 1rem;
+  height: 180px;
+}
+
+.dt-chart-yaxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.dt-chart-ylabel {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-align: right;
+  line-height: 1;
+}
+
+.dt-chart-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dt-chart-bars {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.dt-chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.dt-chart-bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  background: #dbeafe;
+  transition: height .4s ease;
+  min-height: 4px;
+}
+
+.dt-chart-bar--active {
+  background: #3b6ef6;
+}
+
+.dt-chart-xlabel {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* ─── Balance card ─── */
+.dt-card--balance {
+  display: flex;
+  flex-direction: column;
+}
+
+.dt-balance-rows {
+  padding: 0.5rem 1.5rem;
+  flex: 1;
+}
+
+.dt-balance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dt-balance-row:last-child { border-bottom: none; }
+
+.dt-balance-label {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.dt-balance-amount {
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dt-balance-actions {
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* ─── Buttons ─── */
+.dt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all .18s ease;
+}
+
+.dt-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.dt-btn--primary {
+  background: #3b6ef6;
+  color: #fff;
+}
+
+.dt-btn--primary:hover {
+  background: #2d5ee0;
+  color: #fff;
+}
+
+.dt-btn--outline {
+  background: transparent;
+  color: #3b6ef6;
+  border: 1.5px solid #3b6ef6;
+}
+
+.dt-btn--outline:hover {
+  background: #eff4ff;
+}
+
+.dt-btn--ghost {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.dt-btn--ghost:hover { background: #e2e8f0; color: #0f172a; }
+
+.dt-btn--sm {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+/* ─── Table ─── */
+.dt-card--table {}
+
+.dt-table-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.dt-table-wrap {
+  overflow-x: auto;
+}
+
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.dt-table thead tr {
+  border-bottom: 1px solid #edf0f7;
+}
+
+.dt-table th {
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: #fafbff;
+  white-space: nowrap;
+}
+
+.dt-table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.dt-tr-even td {
+  background: #fafbff;
+}
+
+.dt-table tbody tr:last-child td { border-bottom: none; }
+
+.dt-table tbody tr:hover td {
+  background: #f0f4ff;
+}
+
+.dt-table-empty {
+  text-align: center;
+  color: #94a3b8;
+  padding: 2rem !important;
+}
+
+.dt-vm-name {
+  font-weight: 600;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.dt-vm-name:hover { color: #3b6ef6; text-decoration: underline; }
+
+.dt-config-cell {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+}
+
+.dt-os-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.dt-os-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.dt-ip {
+  font-size: 0.82rem;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  background: #f1f5f9;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  color: #334155;
+}
+
+/* ─── Badges status ─── */
+.dt-badge {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.dt-badge--running {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.dt-badge--paused {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.dt-badge--building {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.dt-badge--error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ─── Action buttons ─── */
+.dt-action-btns {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.dt-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .15s ease;
+  color: #64748b;
+  text-decoration: none;
+}
+
+.dt-icon-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.dt-icon-btn:hover {
+  background: #f0f4ff;
+  border-color: #3b6ef6;
+  color: #3b6ef6;
+}
+
+.dt-icon-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dt-icon-btn--danger:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.dt-icon-btn--success:hover {
+  background: #f0fdf4;
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+/* ─── Pagination ─── */
+.dt-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.dt-pgn-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s ease;
+  color: #334155;
+}
+
+.dt-pgn-btn:hover:not(:disabled) {
+  background: #f0f4ff;
+  border-color: #3b6ef6;
+  color: #3b6ef6;
+}
+
+.dt-pgn-btn--active {
+  background: #3b6ef6;
+  border-color: #3b6ef6;
+  color: #fff;
+}
+
+.dt-pgn-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

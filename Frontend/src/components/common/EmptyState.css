@@ -1,0 +1,73 @@
+.empty-state {
+  position: relative;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.empty-state--compact {
+  padding: var(--space-lg);
+}
+
+.empty-state-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.empty-state-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.12;
+}
+
+.empty-state-shape-1 {
+  width: 80px;
+  height: 80px;
+  background: var(--primary);
+  top: 15%;
+  left: 20%;
+}
+
+.empty-state-shape-2 {
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  top: 50%;
+  right: 25%;
+}
+
+.empty-state-shape-3 {
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--primary);
+  background: transparent;
+  bottom: 20%;
+  left: 15%;
+}
+
+.empty-state-title {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0 0 var(--space-sm);
+}
+
+.empty-state-message {
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-lg);
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty-state-action {
+  position: relative;
+}

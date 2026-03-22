@@ -1,0 +1,22 @@
+# Copiez ce fichier en .env dans le dossier Backend/
+
+# OpenStack Configuration
+OS_USERNAME=admin
+OS_PASSWORD=YourSecurePassword123!
+OS_PROJECT_NAME=admin
+OS_AUTH_URL=http://YOUR_VPS_IP/identity/v3
+OS_REGION_NAME=RegionOne
+
+# OpenStack Service URLs
+KEYSTONE_URL=http://YOUR_VPS_IP/identity/v3
+NOVA_URL=http://YOUR_VPS_IP:8774/v2.1
+GLANCE_URL=http://YOUR_VPS_IP:9292
+NEUTRON_URL=http://YOUR_VPS_IP:9696
+
+# Server Configuration
+PORT=3001
+NODE_ENV=development
+
+# CORS Configuration
+CORS_ORIGIN=http://YOUR_VPS_IP
+
