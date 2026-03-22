@@ -361,15 +361,5 @@ pm2 restart backend
 sudo systemctl restart nginx
 ```
 
----
-
-##  Sécurité
-
-1. Changez tous les mots de passe par défaut
-2. Configurez un certificat SSL avec Let's Encrypt
-3. Utilisez un pare-feu (UFW)
-4. Limitez l'accès SSH par clé
-5. Ne committez jamais votre fichier `.env`
-
 
 ---
