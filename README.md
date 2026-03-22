@@ -1,10 +1,3 @@
-Automatisation et optimisation du provisionnement des machines avec Nova
-Projet d'automatisation et de l'optimisation du provisionnement des machines avec openStack nova
-
-Objectifs :
-• Créer un orchestrateur personnalisé pour le déploiement automatique de VM en fonction des besoins métiers
-
-• Implémenter des politiques de planification avancées dans Nova pour optimiser l'utilisation des ressources
 # VM Marketplace — Plateforme de Gestion de Machines Virtuelles
 
 Une application web moderne pour la vente et la gestion de machines virtuelles basée sur OpenStack.
