@@ -371,20 +371,5 @@ sudo systemctl restart nginx
 4. Limitez l'accès SSH par clé
 5. Ne committez jamais votre fichier `.env`
 
----
-
-##  Sauvegarde
-
-```bash
-# Sauvegarder le projet sans node_modules
-zip -r backup-$(date +%Y%m%d).zip VMmarketplace/ -x "*/node_modules/*"
-
-# Sauvegarder uniquement les fichiers importants
-tar -czf config-backup-$(date +%Y%m%d).tar.gz \
-  Backend/.env \
-  Backend/database.sqlite \
-  /etc/nginx/sites-available/vm-marketplace
-```
-
 
 ---
