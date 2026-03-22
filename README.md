@@ -37,7 +37,7 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
   - Gnocchi (Metrics)
   - Placement
   - Horizon (Dashboard)
-- Node.js 20.x ou supérieur
+- Node.js 20.20.0 ou supérieur
 - npm (inclus avec Node.js)
 - SQLite (aucune installation séparée requise)
 - PM2 (gestionnaire de processus Node.js)
@@ -46,26 +46,6 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
 ---
 
 ##  Architecture
-
-```
-┌─────────────┐         ┌─────────────┐         ┌──────────────────────┐
-│             │         │             │         │      OpenStack       │
-│  Frontend   │────────▶│   Backend   │────────▶│  Nova / Keystone     │
-│  (React)    │         │  (Node.js)  │         │  Glance / Neutron    │
-│             │         │             │         │  Gnocchi / Ceilometer│
-└─────────────┘         └─────────────┘         └──────────────────────┘
-      │                        │
-      └────────────┬───────────┘
-                   │
-              ┌────▼────┐
-              │  Nginx  │
-              │  Proxy  │
-              └─────────┘
-                   │
-              ┌────▼──────┐
-              │  SQLite   │
-              └───────────┘
-```
 
 ---
 
@@ -406,20 +386,5 @@ tar -czf config-backup-$(date +%Y%m%d).tar.gz \
   /etc/nginx/sites-available/vm-marketplace
 ```
 
----
-
-##  Roadmap
-
-- [x] Authentification utilisateur (JWT)
-- [x] Tableau de bord admin
-- [x] Facturation automatique (XAF)
-- [~] Auto-scaling vertical des VMs
-- [~] Métriques en temps réel (Gnocchi/Ceilometer)
-- [x] Historique des scalings
-- [x] Notifications en temps réel
-- [ ] Support multi-régions
-- [ ] Monitoring avancé (Grafana)
-- [ ] API REST documentée (Swagger)
-- [ ] Tests unitaires et d'intégration
 
 ---
