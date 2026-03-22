@@ -1,4 +1,4 @@
-# VM Marketplace - Plateforme de Gestion de Machines Virtuelles
+# VM Marketplace — Plateforme de Gestion de Machines Virtuelles
 
 Une application web moderne pour la vente et la gestion de machines virtuelles basée sur OpenStack.
 
@@ -7,7 +7,9 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
 ![React](https://img.shields.io/badge/react-18.x-blue.svg)
 ![OpenStack](https://img.shields.io/badge/openstack-Yoga-red.svg)
 
-## Fonctionnalités
+---
+
+##  Fonctionnalités
 
 - **Dashboard Interactif** : Vue d'ensemble complète de votre infrastructure
 - **Marketplace** : Catalogue de configurations VM avec tarification en XAF
@@ -19,7 +21,9 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
 - **Intégration OpenStack** : Communication directe avec les APIs Nova, Keystone, Glance, Neutron, Gnocchi et Ceilometer
 - **Interface Moderne** : Design responsive et intuitif
 
-## Prérequis
+---
+
+##  Prérequis
 
 - Serveur Ubuntu 22.04 ou 24.04
 - 8 Go RAM minimum (16 Go recommandé)
@@ -34,15 +38,18 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
   - Placement
   - Horizon (Dashboard)
 - Node.js 20.x ou supérieur
-- SQLite (inclus avec Node.js, aucune installation séparée)
-- PM2
+- npm (inclus avec Node.js)
+- SQLite (aucune installation séparée requise)
+- PM2 (gestionnaire de processus Node.js)
 - Nginx
 
-## Architecture
+---
+
+##  Architecture
 
 ```
 ┌─────────────┐         ┌─────────────┐         ┌──────────────────────┐
-│             │         │             │         │      OpenStack        │
+│             │         │             │         │      OpenStack       │
 │  Frontend   │────────▶│   Backend   │────────▶│  Nova / Keystone     │
 │  (React)    │         │  (Node.js)  │         │  Glance / Neutron    │
 │             │         │             │         │  Gnocchi / Ceilometer│
@@ -55,15 +62,17 @@ Une application web moderne pour la vente et la gestion de machines virtuelles b
               │  Proxy  │
               └─────────┘
                    │
-              ┌────▼────────┐
-              │ PostgreSQL  │
-              └─────────────┘
+              ┌────▼──────┐
+              │  SQLite   │
+              └───────────┘
 ```
 
-## Structure du Projet
+---
+
+##  Structure du Projet
 
 ```
-Devstack/
+VMmarketplace/
 ├── Backend/                        # API Node.js/Express
 │   ├── config/                    # Configuration OpenStack et base de données
 │   ├── controllers/               # Contrôleurs (scaling, billing, admin)
@@ -77,7 +86,7 @@ Devstack/
 │   │   ├── gnocchi.js            # Collecte métriques Gnocchi
 │   │   ├── metricsCollector.js   # Collecte et analyse des métriques
 │   │   ├── metricsMonitor.js     # Surveillance des seuils
-│   │   └── notificationService.js# Service de notifications
+│   │   └── notificationService.js # Service de notifications
 │   ├── utils/                     # Utilitaires (logger, envDebug)
 │   ├── server.js                  # Serveur principal
 │   └── package.json              # Dépendances Backend
@@ -95,28 +104,30 @@ Devstack/
 └── README.md                      # Ce fichier
 ```
 
-## Scaling Automatique
+---
+
+##  Scaling Automatique
 
 Le système de scaling vertical surveille en permanence les métriques de chaque VM et ajuste automatiquement les ressources selon les seuils configurés.
 
 ### Fonctionnement
 
 ```
-Métriques collectées toutes les 30 secondes (Gnocchi)
+Métriques collectées toutes les 2 minutes via Gnocchi
         ↓
-Vérification des seuils toutes les 30 secondes
+Vérification des seuils toutes les 2 minutes
         ↓
 CPU ou RAM > 80% → Scale Up automatique
 CPU ET RAM < 20% → Scale Down automatique
         ↓
-Cooldown de 3 minutes entre chaque scaling
+Cooldown de 5 minutes entre chaque scaling
         ↓
-Confirmation du resize en 1 minutes 30 secondes
+Confirmation du resize en 3 minutes
 ```
 
-### Configuration de la politique de scaling
+### Configuration de la politique de scaling via l'API
 
-```bash
+```
 PUT /api/vms/:id/scaling-policy
 {
   "metricType": "cpu_and_memory",
@@ -127,7 +138,9 @@ PUT /api/vms/:id/scaling-policy
 }
 ```
 
-## Facturation Automatique
+---
+
+##  Facturation Automatique
 
 La facturation est basée sur l'utilisation réelle des VMs :
 
@@ -146,39 +159,55 @@ La facturation est basée sur l'utilisation réelle des VMs :
 | RAM (par Go/heure) | 50 XAF |
 | Stockage (par Go/heure) | 0.01 XAF |
 
-## Installation
+---
 
-### Étape 1 — Cloner le depot
+##  Base de Données
 
-git clone <url-du-repo> nom_dossier
-cd nom_Dossier
+Ce projet utilise **SQLite** — aucune installation externe n'est nécessaire. Le fichier `database.sqlite` est créé automatiquement lors de la migration.
 
-### Étape 2 — Backend
+
+##  Installation
+
+### Étape 1 — Cloner le dépôt
 
 ```bash
-# Aller dans le dossier Backend
+git clone <url-du-repo> VMmarketplace
+cd VMmarketplace
+```
+
+### Étape 2 — Donner les droits sur le dossier (si déploiement sur serveur)
+
+```bash
+# Remplacez "votre_utilisateur" par votre nom d'utilisateur Linux
+sudo chown -R votre_utilisateur:votre_utilisateur /var/www/VMmarketplace
+sudo chmod -R 755 /var/www/VMmarketplace/Backend
+```
+
+### Étape 3 — Configurer le Backend
+
+```bash
 cd Backend
 
 # Installer les dépendances
 npm install
 
-# Configurer le fichier .env (OBLIGATOIRE)
+# Créer le fichier de configuration
 cp .env.example .env
-# Ouvrir et modifier .env avec vos valeurs OpenStack
+
+# Remplir le fichier .env avec vos valeurs OpenStack
 nano .env
 
-# Lancer les migrations (crée la base de données SQLite)
+# Créer la base de données SQLite (migrations)
 npm run migrate
 
 # Démarrer le backend
 npm start
 ```
 
-### Étape 3 — Frontend
+### Étape 4 — Démarrer le Frontend
 
 ```bash
 # Ouvrir un nouveau terminal
-# Aller dans le dossier Frontend
 cd Frontend
 
 # Installer les dépendances
@@ -190,52 +219,9 @@ npm start
 
 > **Note** : Le frontend n'a pas besoin de fichier `.env`. Toute la configuration se fait uniquement dans le `.env` du Backend.
 
-## Déploiement sur serveur Ubuntu
+---
 
-Si vous copiez le projet dans `/var/www/`, vous devez donner les droits à votre utilisateur sur le dossier :
-
-```bash
-# Copier le projet
-sudo cp -r nom_Dossier/ /var/www/nom_dossier
-
-# Donner les droits à votre utilisateur (remplacez "root" par votre utilisateur)
-sudo chown -R root:root /var/www/nom_dossier
-
-# Donner les permissions sur le dossier Backend (pour SQLite)
-sudo chmod -R 755 /var/www/nom_dossier/Backend
-
-# Aller dans le Backend
-cd /var/www/nom_dossier/Backend
-
-# Installer les dépendances
-npm install
-
-# Créer et configurer le .env
-cp .env.example .env
-nano .env
-
-# Lancer les migrations
-npm run migrate
-
-# Démarrer avec PM2
-pm2 start server.js --name backend
-pm2 save
-
-# Ou manunuellement
-npm start
-
-# Aller dans le Frontend
-cd /var/www/Devstack/Frontend
-npm install
-pm2 start npm --name frontend -- start
-pm2 save
-
-# Ou manunuellement
-npm start
-```
-
-
-### Backend (.env) — Seul fichier à configurer
+##  Exemple — Fichier Backend/.env
 
 Copiez ce contenu dans `Backend/.env` et remplacez `VOTRE_IP` par l'adresse IP de votre serveur OpenStack :
 
@@ -294,7 +280,9 @@ NODE_ENV=production
 # GOOGLE_CLIENT_SECRET=
 ```
 
-## API Endpoints
+---
+
+##  API Endpoints
 
 ### Health Check
 ```
@@ -303,58 +291,64 @@ GET /api/health
 
 ### VMs
 ```
-GET    /api/vms                        # Liste des VMs
-POST   /api/vms                        # Créer une VM
-GET    /api/vms/:id                    # Détails d'une VM
-DELETE /api/vms/:id                    # Supprimer une VM
-POST   /api/vms/:id/action             # Action (start, stop, reboot...)
-GET    /api/vms/:id/metrics            # Métriques de la VM
-GET    /api/vms/:id/scaling-policy     # Politique de scaling
-PUT    /api/vms/:id/scaling-policy     # Configurer le scaling
-GET    /api/vms/:id/scaling-history    # Historique des scalings
-GET    /api/vms/:id/console            # Console VNC
+GET    /api/vms                     # Liste des VMs
+POST   /api/vms                     # Créer une VM
+GET    /api/vms/:id                 # Détails d'une VM
+DELETE /api/vms/:id                 # Supprimer une VM
+POST   /api/vms/:id/action          # Action (start, stop, reboot...)
+GET    /api/vms/:id/metrics         # Métriques de la VM
+GET    /api/vms/:id/scaling-policy  # Politique de scaling
+PUT    /api/vms/:id/scaling-policy  # Configurer le scaling
+GET    /api/vms/:id/scaling-history # Historique des scalings
+GET    /api/vms/:id/console         # Console VNC
 ```
 
 ### Facturation
 ```
-GET  /api/invoices              # Liste des factures
-GET  /api/invoices/:id          # Détails d'une facture
-GET  /api/invoices/:id/download # Télécharger en PDF
-POST /api/invoices/:id/pay      # Payer une facture
-GET  /api/pricing-rules         # Règles tarifaires
+GET  /api/invoices               # Liste des factures
+GET  /api/invoices/:id           # Détails d'une facture
+GET  /api/invoices/:id/download  # Télécharger en PDF
+POST /api/invoices/:id/pay       # Payer une facture
+GET  /api/pricing-rules          # Règles tarifaires
 ```
 
 ### Flavors & Images
 ```
-GET /api/flavors          # Liste des configurations
-GET /api/images           # Liste des images OS
-GET /api/openstack/status # Statut OpenStack
+GET /api/flavors           # Liste des configurations
+GET /api/images            # Liste des images OS
+GET /api/openstack/status  # Statut OpenStack
 ```
 
-## Commandes Utiles
+---
 
-### PM2
+##  Commandes Utiles
+
+### PM2 — Gestion des processus
 
 ```bash
-pm2 list                  # Statut des applications
-pm2 logs backend          # Logs du backend
-pm2 restart backend       # Redémarrer le backend
-pm2 stop all              # Arrêter tout
-pm2 monit                 # Monitoring en temps réel
+pm2 list               # Voir les applications qui tournent
+pm2 logs backend       # Voir les logs du backend
+pm2 restart backend    # Redémarrer le backend
+pm2 stop all           # Arrêter toutes les applications
+pm2 save               # Sauvegarder pour redémarrage automatique
+pm2 monit              # Monitoring en temps réel
 ```
 
 ### OpenStack
 
 ```bash
-source /home/user/admin-openrc
+# Charger les credentials OpenStack
+source /home/votre_utilisateur/admin-openrc
 
-openstack server list     # Liste des VMs
-openstack flavor list     # Liste des configurations
-openstack image list      # Liste des images
-openstack network list    # Liste des réseaux
+openstack server list   # Liste des VMs
+openstack flavor list   # Liste des configurations
+openstack image list    # Liste des images
+openstack network list  # Liste des réseaux
 ```
 
-## Dépannage
+---
+
+##  Dépannage
 
 ### Le Backend ne se connecte pas à OpenStack
 
@@ -369,10 +363,12 @@ pm2 logs backend --lines 50
 ### Le scaling ne se déclenche pas
 
 ```bash
-# Vérifier que la ScalingPolicy est active
+cd /var/www/VMmarketplace/Backend
+
+# Vérifier que des politiques de scaling sont actives en base
 node -e "require('dotenv').config(); const { ScalingPolicy } = require('./models'); ScalingPolicy.findAll({ where: { isActive: true } }).then(p => console.log(p.length, 'policies actives')).catch(console.error);"
 
-# Vérifier que Gnocchi remonte des métriques
+# Vérifier que Gnocchi est accessible
 TOKEN=$(openstack token issue -f value -c id)
 curl -H "X-Auth-Token: $TOKEN" http://VOTRE_IP:8041/v1/status
 ```
@@ -385,7 +381,9 @@ pm2 restart backend
 sudo systemctl restart nginx
 ```
 
-## Sécurité
+---
+
+##  Sécurité
 
 1. Changez tous les mots de passe par défaut
 2. Configurez un certificat SSL avec Let's Encrypt
@@ -393,11 +391,13 @@ sudo systemctl restart nginx
 4. Limitez l'accès SSH par clé
 5. Ne committez jamais votre fichier `.env`
 
-## Sauvegarde
+---
+
+##  Sauvegarde
 
 ```bash
 # Sauvegarder le projet sans node_modules
-zip -r backup-$(date +%Y%m%d).zip nom_dossier/ -x "*/node_modules/*"
+zip -r backup-$(date +%Y%m%d).zip VMmarketplace/ -x "*/node_modules/*"
 
 # Sauvegarder uniquement les fichiers importants
 tar -czf config-backup-$(date +%Y%m%d).tar.gz \
@@ -406,7 +406,9 @@ tar -czf config-backup-$(date +%Y%m%d).tar.gz \
   /etc/nginx/sites-available/vm-marketplace
 ```
 
-## Roadmap
+---
+
+##  Roadmap
 
 - [x] Authentification utilisateur (JWT)
 - [x] Tableau de bord admin
@@ -421,5 +423,3 @@ tar -czf config-backup-$(date +%Y%m%d).tar.gz \
 - [ ] Tests unitaires et d'intégration
 
 ---
-
-**Auteurs** : YAKAM Rick & MEMEZAGUE Fabiola
